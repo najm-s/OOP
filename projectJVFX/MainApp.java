@@ -1,0 +1,50 @@
+package com.mycompany.try1;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+public class MainApp extends Application {
+    private Stage primaryStage;
+    private User currentUser;
+    private UserManager userManager;
+
+    @Override
+    public void start(Stage stage) {
+        primaryStage = stage;
+        userManager = new UserManager();
+
+        primaryStage.setTitle("To-Do List App");
+        showLoginPage();
+        primaryStage.show();
+    }
+
+    public void showLoginPage() {
+        LoginController loginController = new LoginController(this, userManager);
+        Scene scene = new Scene(loginController.getView(), 450, 350);
+        primaryStage.setScene(scene);
+    }
+
+    public void showDashboardPage(User user) {
+        currentUser = user;
+        DashboardController dashboardController = new DashboardController(this, currentUser);
+        Scene scene = new Scene(dashboardController.getView(), 900, 600);
+        primaryStage.setScene(scene);
+    }
+
+    public void showTaskPage(User user) {
+        currentUser = user;
+        TaskController taskController = new TaskController(this, currentUser);
+        Scene scene = new Scene(taskController.getView(), 950, 620);
+        primaryStage.setScene(scene);
+    }
+
+    public void logout() {
+        currentUser = null;
+        showLoginPage();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
