@@ -26,34 +26,70 @@ public class LoginController {
     }
 
     public Parent getView() {
-        Label titleLabel = new Label("To-Do List Login");
-        titleLabel.setFont(new Font(24));
+    Label titleLabel = new Label("To-Do List");
+    titleLabel.setFont(Font.font("System", javafx.scene.text.FontWeight.BOLD, 28));
+    titleLabel.setStyle("-fx-text-fill: #2C3E50;");
 
-        usernameField = new TextField();
-        usernameField.setPromptText("Enter username");
-        usernameField.setMaxWidth(260);
+    Label subtitleLabel = new Label("Sign in to manage your daily tasks");
+    subtitleLabel.setFont(Font.font("System", 14));
+    subtitleLabel.setStyle("-fx-text-fill: #7F8C8D;");
 
-        passwordField = new PasswordField();
-        passwordField.setPromptText("Enter password");
-        passwordField.setMaxWidth(260);
+    String inputStyle = "-fx-background-color: #FAFAFA; " +
+                        "-fx-border-color: #BDC3C7; " +
+                        "-fx-border-width: 1; " +
+                        "-fx-border-radius: 6; " +
+                        "-fx-background-radius: 6; " +
+                        "-fx-padding: 10;";
 
-        Button loginButton = new Button("Login");
-        Button registerButton = new Button("Register");
-        loginButton.setMaxWidth(260);
-        registerButton.setMaxWidth(260);
+    usernameField = new TextField();
+    usernameField.setPromptText("Username");
+    usernameField.setMaxWidth(280);
+    usernameField.setStyle(inputStyle);
 
-        loginButton.setOnAction(event -> handleLogin());
-        registerButton.setOnAction(event -> handleRegister());
+    passwordField = new PasswordField();
+    passwordField.setPromptText("Password");
+    passwordField.setMaxWidth(280);
+    passwordField.setStyle(inputStyle);
 
-        messageLabel = new Label();
+    Button loginButton = new Button("Login");
+    loginButton.setMaxWidth(280);
+    loginButton.setStyle("-fx-background-color: #3498DB; " +
+                         "-fx-text-fill: white; " +
+                         "-fx-font-weight: bold; " +
+                         "-fx-font-size: 14px; " +
+                         "-fx-padding: 10; " +
+                         "-fx-background-radius: 6; " +
+                         "-fx-cursor: hand;");
 
-        VBox layout = new VBox(12);
-        layout.getChildren().addAll(titleLabel, usernameField, passwordField, loginButton, registerButton, messageLabel);
-        layout.setAlignment(Pos.CENTER);
-        layout.setPadding(new Insets(20));
+    Button registerButton = new Button("Don't have an account? Register");
+    registerButton.setMaxWidth(280);
+    registerButton.setStyle("-fx-background-color: transparent; " +
+                            "-fx-text-fill: #3498DB; " +
+                            "-fx-font-size: 13px; " +
+                            "-fx-cursor: hand;");
 
-        return layout;
-    }
+    loginButton.setOnAction(event -> handleLogin());
+    registerButton.setOnAction(event -> handleRegister());
+
+    messageLabel = new Label();
+    messageLabel.setFont(Font.font("System", 13));
+    messageLabel.setWrapText(true);
+    messageLabel.setMaxWidth(280);
+    messageLabel.setAlignment(Pos.CENTER);
+
+    VBox formContainer = new VBox(16);
+    formContainer.getChildren().addAll(usernameField, passwordField, loginButton, registerButton, messageLabel);
+    formContainer.setAlignment(Pos.CENTER);
+    formContainer.setPadding(new Insets(10, 0, 0, 0));
+
+    VBox rootLayout = new VBox(8);
+    rootLayout.getChildren().addAll(titleLabel, subtitleLabel, formContainer);
+    rootLayout.setAlignment(Pos.CENTER);
+    rootLayout.setPadding(new Insets(40));
+    rootLayout.setStyle("-fx-background-color: #F5F7FA;"); 
+
+    return rootLayout;
+}
 
     private void handleLogin() {
         String username = usernameField.getText().trim();
