@@ -111,8 +111,4 @@ public class UserManager {
 
         fileHandler.saveUsers(userList);
     }
-
-    public ArrayList<User> getUserList() {
-        return userList;
-    }
 }
