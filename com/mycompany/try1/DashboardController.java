@@ -48,11 +48,11 @@ public class DashboardController {
                            "-fx-border-width: 1; " +
                            "-fx-min-width: 140;";
 
-        VBox streakCard = createStatCard("🔥 Streak", currentUser.getStreakCount() + " days", cardStyle);
-        VBox totalCard = createStatCard("📋 Total", String.valueOf(dashboard.getTotalTasks()), cardStyle);
-        VBox completedCard = createStatCard("✅ Done", String.valueOf(dashboard.getCompletedTasks()), cardStyle);
-        VBox pendingCard = createStatCard("⏳ Pending", String.valueOf(dashboard.getPendingTasks()), cardStyle);
-        VBox percentCard = createStatCard("📈 Progress", String.format("%.0f%%", dashboard.getCompletionPercentage()), cardStyle);
+        VBox streakCard = createStatCard("Streak", currentUser.getStreakCount() + " days", cardStyle);
+        VBox totalCard = createStatCard("Total", String.valueOf(dashboard.getTotalTasks()), cardStyle);
+        VBox completedCard = createStatCard("Done", String.valueOf(dashboard.getCompletedTasks()), cardStyle);
+        VBox pendingCard = createStatCard("Pending", String.valueOf(dashboard.getPendingTasks()), cardStyle);
+        VBox percentCard = createStatCard("Progress", String.format("%.0f%%", dashboard.getCompletionPercentage()), cardStyle);
 
         HBox statsRow = new HBox(16);
         statsRow.getChildren().addAll(streakCard, totalCard, completedCard, pendingCard, percentCard);
