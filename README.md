@@ -1,8 +1,12 @@
 # OOP
 
 ## Run this project
+before opening powershell in address bar open this folder first
 
-1. Run `compile.bat` to compile the JavaFX app.
-2. Run `run.bat` to start it.
+1. In PowerShell, run `./compile.bat` to compile the JavaFX app.
+2. In PowerShell, run `./run.bat` to start it.
 
-The JavaFX JAR files are included in the `lib/` folder so teammates do not need to install a separate JavaFX SDK manually.
+The scripts now use the installed JavaFX SDK on this machine when available, and fall back to the project `lib/` folder otherwise.
+
+
+we use compile and run for our team members that use different kind of compiler
