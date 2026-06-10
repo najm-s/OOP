@@ -8,7 +8,9 @@ public class User extends Account {
     private LocalDate lastLoginDate;
     private ArrayList<Task> taskList;
 
-    // Constructor is activated right after user account is created
+    // Runs after a new user successfully registers.
+    // and creates a new User object with default values like last login date, streak count and 
+    // an empty task list.
     public User(String username, String password) {
         super(username, password);
         streakCount = 0;
@@ -23,15 +25,17 @@ public class User extends Account {
         this.lastLoginDate = lastLoginDate;
         taskList = new ArrayList<>();
     }
-    
+
+    // used by dashboard to show user's current steak
     public int getStreakCount() {
         return streakCount;
     }
 
+    // runs right after streak is calculated during login process
     public void setStreakCount(int streakCount) {
         this.streakCount = streakCount;
     }
-
+    // used by StreakManager to check the previous login date.
     public LocalDate getLastLoginDate() {
         return lastLoginDate;
     }
@@ -40,10 +44,12 @@ public class User extends Account {
         this.lastLoginDate = lastLoginDate;
     }
 
+    //Return user's list of tasks
     public ArrayList<Task> getTaskList() {
         return taskList;
     }
 
+    //used when FileHandler load task from tasks.txt
     public void setTaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
