@@ -8,6 +8,7 @@ public class User extends Account {
     private LocalDate lastLoginDate;
     private ArrayList<Task> taskList;
 
+    // Constructor is activated right after user account is created
     public User(String username, String password) {
         super(username, password);
         streakCount = 0;
@@ -15,13 +16,14 @@ public class User extends Account {
         taskList = new ArrayList<>();
     }
 
+    // is used to load an existing user from users.txt
     public User(String username, String password, int streakCount, LocalDate lastLoginDate) {
         super(username, password);
         this.streakCount = streakCount;
         this.lastLoginDate = lastLoginDate;
         taskList = new ArrayList<>();
     }
-
+    
     public int getStreakCount() {
         return streakCount;
     }
@@ -46,14 +48,14 @@ public class User extends Account {
         this.taskList = taskList;
     }
 
+    // format user data 
     public String toFileString() {
+        // variable to store date in Strign form
         String dateText;
 
-        if (lastLoginDate == null) {
-            dateText = "null";
-        } else {
-            dateText = lastLoginDate.toString();
-        }
+        // set dateText as null when the user haven't log in before
+        if (lastLoginDate == null) {dateText = "null";} 
+        else {dateText = lastLoginDate.toString();}
 
         return getUsername() + "|" + getStoredPassword() + "|" + streakCount + "|" + dateText;
     }
