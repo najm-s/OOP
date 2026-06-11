@@ -9,16 +9,21 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+// Handles all file operations for the application.
+// Responsible for saving and loading user and task data from text files.
 public class FileHandler {
     private File userFile;
     private File taskFile;
 
+    // assigns file paths to File object
+    
     public FileHandler() {
         userFile = new File("users.txt");
         taskFile = new File("tasks.txt");
         createFilesIfMissing();
     }
 
+    // Creates users.txt and tasks.txt if they do not already exist.
     private void createFilesIfMissing() {
         try {
             if (!userFile.exists()) {
@@ -33,6 +38,9 @@ public class FileHandler {
         }
     }
 
+    // Saves all user data into users.txt
+    // Every saveUsers() executes it overwrites everything because the object users 
+    // is constantly being updated and immediately saved right after updating it.
     public void saveUsers(ArrayList<User> users) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(userFile));
@@ -49,6 +57,7 @@ public class FileHandler {
         }
     }
 
+    // Loads all users from users.txt and converts them into User objects.
     public ArrayList<User> loadUsers() {
         ArrayList<User> users = new ArrayList<>();
 
@@ -56,6 +65,7 @@ public class FileHandler {
             BufferedReader reader = new BufferedReader(new FileReader(userFile));
             String line;
 
+            // continue when it detects a blank line
             while ((line = reader.readLine()) != null) {
                 if (line.isBlank()) {
                     continue;
@@ -67,6 +77,7 @@ public class FileHandler {
                     continue;
                 }
 
+                // retrieve username and password
                 String username = parts[0];
                 String password = parts[1];
                 int streakCount = Integer.parseInt(parts[2]);
@@ -94,18 +105,18 @@ public class FileHandler {
     }
 
     public void saveTasks(User currentUser) {
-        ArrayList<String> allTaskLines = new ArrayList<>();
+        ArrayList<String> allTasks = new ArrayList<>();
 
         try {
             BufferedReader reader = new BufferedReader(new FileReader(taskFile));
-            String line;
+            String ;
 
-            while ((line = reader.readLine()) != null) {
-                if (line.isBlank()) {
+            while (( = reader.read()) != null) {
+                if (.isBlank()) {
                     continue;
                 }
 
-                String[] parts = line.split("\\|");
+                String[] parts = .split("\\|");
 
                 if (parts.length < 5) {
                     continue;
@@ -114,7 +125,7 @@ public class FileHandler {
                 String savedUsername = parts[0];
 
                 if (!savedUsername.equalsIgnoreCase(currentUser.getUsername())) {
-                    allTaskLines.add(line);
+                    allTasks.add();
                 }
             }
 
@@ -122,14 +133,14 @@ public class FileHandler {
 
             for (int i = 0; i < currentUser.getTaskList().size(); i++) {
                 Task task = currentUser.getTaskList().get(i);
-                allTaskLines.add(task.toFileString(currentUser.getUsername()));
+                allTasks.add(task.toFileString(currentUser.getUsername()));
             }
 
             BufferedWriter writer = new BufferedWriter(new FileWriter(taskFile));
 
-            for (int i = 0; i < allTaskLines.size(); i++) {
-                writer.write(allTaskLines.get(i));
-                writer.newLine();
+            for (int i = 0; i < allTasks.size(); i++) {
+                writer.write(allTasks.get(i));
+                writer.new();
             }
 
             writer.close();
