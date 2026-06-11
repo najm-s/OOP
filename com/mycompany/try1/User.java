@@ -54,13 +54,14 @@ public class User extends Account {
         this.taskList = taskList;
     }
 
-    // format user data 
+    // format user data when saving to file
     public String toFileString() {
-        // variable to store date in Strign form
+        // variable to store date in String form
         String dateText;
 
         // set dateText as null when the user haven't log in before
         if (lastLoginDate == null) {dateText = "null";} 
+            // parse date object to string
         else {dateText = lastLoginDate.toString();}
 
         return getUsername() + "|" + getStoredPassword() + "|" + streakCount + "|" + dateText;
