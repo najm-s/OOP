@@ -3,6 +3,8 @@ package com.mycompany.try1;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+// Handles all operations of task such as adding a task (addTask()), edit a task (editTask()), delete a task (deleteTask()),
+// marking completed tasks, 
 public class TaskManager {
     private User currentUser;
     private FileHandler fileHandler;
@@ -12,12 +14,21 @@ public class TaskManager {
         fileHandler = new FileHandler();
     }
 
+    // runs when user clicks on add task then activates
+    // handleAddTask() in TaskController.
+    // handleAddTask() invokes addTask();
     public void addTask(String activityName, LocalDate deadline, String priority) {
+        // Assigns task values to task variables.
+        // initially status set to false.
         Task newTask = new Task(activityName, deadline, priority, false);
+        // add new task into tasklist
         currentUser.getTaskList().add(newTask);
+        // save to file immediately
         fileHandler.saveTasks(currentUser);
     }
-
+    // runs when user clicks on edit task then activates
+    // handleEditTask() in TaskController
+    // handleEditTask() calls editTask();
     public void editTask(Task selectedTask, String newName, LocalDate newDeadline, String newPriority) {
         if (selectedTask != null) {
             selectedTask.setActivityName(newName);
@@ -27,6 +38,10 @@ public class TaskManager {
         }
     }
 
+
+    // runs when user clicks on delete task button then activates
+    // handleDeleteTask() in TaskController
+    // handleDeleteTask() calls deleteTask();
     public void deleteTask(Task selectedTask) {
         if (selectedTask != null) {
             currentUser.getTaskList().remove(selectedTask);
@@ -36,15 +51,20 @@ public class TaskManager {
 
     public void markTaskCompleted(Task selectedTask) {
         if (selectedTask != null) {
-            selectedTask.setCompleted(true);
+            boolean markAsComplete = true;
+            selectedTask.setCompleted(markAsComplete);
             fileHandler.saveTasks(currentUser);
         }
     }
 
+    // returns the current user's tasks
     public ArrayList<Task> getAllTasks() {
         return currentUser.getTaskList();
     }
 
+    // counts the exact number of finished tasks.
+    // value is returned to to the Dashboard
+    // used by Dashboard and DashboardController classes.
     public int countCompletedTasks() {
         int count = 0;
 
@@ -59,6 +79,7 @@ public class TaskManager {
         return count;
     }
 
+    // used in the calculation on how many uncompleted task a user has. 
     public int countPendingTasks() {
         int count = 0;
 
