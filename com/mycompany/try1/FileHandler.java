@@ -38,9 +38,7 @@ public class FileHandler {
         }
     }
 
-    // Saves all user data into users.txt
-    // Every saveUsers() executes it overwrites everything because the object users 
-    // is constantly being updated and immediately saved right after updating it.
+    // saves all users to users.txt by overwriting the existing file with updated data
     public void saveUsers(ArrayList<User> users) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(userFile));
