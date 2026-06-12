@@ -11,10 +11,10 @@ public class Task {
     private boolean completed;
 
     // invoked during adding a task and loadTaskForUser();
-    public Task(String activityName, LocalDate deadline, String priority, boolean completed) {
-        this.activityName = activityName;
-        this.deadline = deadline;
-        this.priority = priority;
+    public Task(String taskName, LocalDate deadLine, String taskPriority, boolean completed) {
+        this.activityName = taskName;
+        this.deadline = deadLine;
+        this.priority = taskPriority;
         this.completed = completed;
     }
 
@@ -39,8 +39,8 @@ public class Task {
         return priority;
     }
 
-    public void setPriority(String priority) {
-        this.priority = priority;
+    public void setPriority(String taskPriority) {
+        this.priority = taskPriority;
     }
 
     public boolean isCompleted() {
@@ -53,9 +53,9 @@ public class Task {
 
     public String getStatusText() {
         if (completed) {
-            return "Completed";
+            return "Completed!";
         } else {
-            return "Pending";
+            return "Pending...";
         }
     }
 
