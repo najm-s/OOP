@@ -174,10 +174,10 @@ public class FileHandler {
                     String taskName = parts[1];
                     LocalDate deadLine = LocalDate.parse(parts[2]);
                     String taskPriority = parts[3];
-                    boolean completed = Boolean.parseBoolean(parts[4]);
+                    boolean whenCompleted = Boolean.parseBoolean(parts[4]);
 
                     // create a Task object using the extracted values
-                    Task task = new Task(taskName, deadLine, taskPriority, completed);
+                    Task task = new Task(taskName, deadLine, taskPriority, whenCompleted);
                     tasks.add(task);
                 }
             }
