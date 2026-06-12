@@ -19,12 +19,14 @@ public class MainApp extends Application {
         primaryStage.show();
     }
 
+    //Will forward it to login page, using LoginContoller class
     public void showLoginPage() {
         LoginController loginController = new LoginController(this, userManager);
         Scene scene = new Scene(loginController.getView(), 450, 350);
         primaryStage.setScene(scene);
     }
 
+    //Forward to DashboardController
     public void showDashboardPage(User user) {
         currentUser = user;
         DashboardController dashboardController = new DashboardController(this, currentUser);
@@ -32,6 +34,7 @@ public class MainApp extends Application {
         primaryStage.setScene(scene);
     }
 
+    //Forward to TaskController
     public void showTaskPage(User user) {
         currentUser = user;
         TaskController taskController = new TaskController(this, currentUser);
@@ -39,6 +42,7 @@ public class MainApp extends Application {
         primaryStage.setScene(scene);
     }
 
+    //Back to LoginController
     public void logout() {
         currentUser = null;
         showLoginPage();
