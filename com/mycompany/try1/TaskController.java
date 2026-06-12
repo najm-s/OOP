@@ -186,7 +186,7 @@ public class TaskController {
         String priority = priorityComboBox.getValue();
 
         if (activityName.isBlank() || deadline == null || priority == null) {
-            messageLabel.setText("⚠️ Please fill out all fields before adding a task.");
+            messageLabel.setText(" Please fill out all fields before adding a task.");
             messageLabel.setStyle("-fx-text-fill: #E74C3C;");
             return;
         }
@@ -194,7 +194,7 @@ public class TaskController {
         taskManager.addTask(activityName, deadline, priority);
         refreshTable();
         clearTaskFields();
-        messageLabel.setText("✅ Task added successfully.");
+        messageLabel.setText(" Task added successfully.");
         messageLabel.setStyle("-fx-text-fill: #2ECC71;");
     }
 
@@ -202,7 +202,7 @@ public class TaskController {
         Task selectedTask = taskTable.getSelectionModel().getSelectedItem();
 
         if (selectedTask == null) {
-            messageLabel.setText("⚠️ Please select a task from the table to edit.");
+            messageLabel.setText(" Please select a task from the table to edit.");
             messageLabel.setStyle("-fx-text-fill: #E74C3C;");
             return;
         }
@@ -212,7 +212,7 @@ public class TaskController {
         String newPriority = priorityComboBox.getValue();
 
         if (newName.isBlank() || newDeadline == null || newPriority == null) {
-            messageLabel.setText("⚠️ Please complete all fields before saving edits.");
+            messageLabel.setText(" Please complete all fields before saving edits.");
             messageLabel.setStyle("-fx-text-fill: #E74C3C;");
             return;
         }
@@ -220,7 +220,7 @@ public class TaskController {
         taskManager.editTask(selectedTask, newName, newDeadline, newPriority);
         refreshTable();
         clearTaskFields();
-        messageLabel.setText("✅ Task updated successfully.");
+        messageLabel.setText(" Task updated successfully.");
         messageLabel.setStyle("-fx-text-fill: #2ECC71;");
     }
 
@@ -228,7 +228,7 @@ public class TaskController {
         Task selectedTask = taskTable.getSelectionModel().getSelectedItem();
 
         if (selectedTask == null) {
-            messageLabel.setText("⚠️ Please select a task to delete.");
+            messageLabel.setText(" Please select a task to delete.");
             messageLabel.setStyle("-fx-text-fill: #E74C3C;");
             return;
         }
@@ -244,14 +244,14 @@ public class TaskController {
         Task selectedTask = taskTable.getSelectionModel().getSelectedItem();
 
         if (selectedTask == null) {
-            messageLabel.setText("⚠️ Please select a task to mark as completed.");
+            messageLabel.setText(" Please select a task to mark as completed.");
             messageLabel.setStyle("-fx-text-fill: #E74C3C;");
             return;
         }
 
         taskManager.markTaskCompleted(selectedTask);
         refreshTable();
-        messageLabel.setText("🎉 Task marked as completed!");
+        messageLabel.setText(" Task marked as completed!");
         messageLabel.setStyle("-fx-text-fill: #2ECC71;");
     }
 
