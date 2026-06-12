@@ -171,13 +171,13 @@ public class FileHandler {
 
                 // searches for the correct username
                 if (savedUsername.equalsIgnoreCase(username)) {
-                    String activityName = parts[1];
-                    LocalDate deadline = LocalDate.parse(parts[2]);
-                    String priority = parts[3];
+                    String taskName = parts[1];
+                    LocalDate deadLine = LocalDate.parse(parts[2]);
+                    String taskPriority = parts[3];
                     boolean completed = Boolean.parseBoolean(parts[4]);
 
                     // create a Task object using the extracted values
-                    Task task = new Task(activityName, deadline, priority, completed);
+                    Task task = new Task(taskName, deadLine, taskPriority, completed);
                     tasks.add(task);
                 }
             }
