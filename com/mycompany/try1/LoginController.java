@@ -127,7 +127,7 @@ public class LoginController {
         String username = usernameField.getText().trim();
         String password = passwordField.getText();
 
-        User user = userManager.login(username, password);
+        User user = userManager.login(username,password);
 
         if (user == null) {
             messageLabel.setText("Invalid username or password.");
@@ -144,9 +144,9 @@ public class LoginController {
         String username = usernameField.getText().trim();
         String password = passwordField.getText();
 
-        boolean success = userManager.registerUser(username, password);
+        boolean ifSuccess = userManager.registerUser(username,password);
 
-        if (success) {
+        if (ifSuccess) {
             messageLabel.setText("Account registered successfully. You can now login.");
             messageLabel.setStyle("-fx-text-fill: #2ECC71;");
             usernameField.clear();
