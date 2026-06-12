@@ -113,7 +113,7 @@ public class FileHandler {
                     continue;
                 }
 
-                String[] parts = .split("\\|");
+                String[] parts = line.split("\\|");
 
                 if (parts.length < 5) {
                     continue;
@@ -123,7 +123,7 @@ public class FileHandler {
 
                 // This block of code saves tasks for the non-current users
                 if (!savedUsername.equalsIgnoreCase(currentUser.getUsername())) {
-                    allTasks.add();
+                    allTasks.add(line);
                 }
             }
 
@@ -140,7 +140,7 @@ public class FileHandler {
             // saves into tasks.txt
             for (int i = 0; i < allTasks.size(); i++) {
                 writer.write(allTasks.get(i));
-                writer.new();
+                writer.newLine();
             }
 
             writer.close();
@@ -176,6 +176,7 @@ public class FileHandler {
                     String priority = parts[3];
                     boolean completed = Boolean.parseBoolean(parts[4]);
 
+                    // create a Task object using the extracted values
                     Task task = new Task(activityName, deadline, priority, completed);
                     tasks.add(task);
                 }
@@ -185,7 +186,9 @@ public class FileHandler {
         } 
         catch (IOException e) {System.out.println("Error loading tasks: " + e.getMessage());} 
         catch (Exception e) {System.out.println("Data format error in tasks file: " + e.getMessage());}
-
+        
+        // return the completed list of tasks belonging to the logged-in user
+        // received by user.setTaskList() in UserManager.login()
         return tasks;
     }
 }
