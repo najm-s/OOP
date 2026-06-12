@@ -1,4 +1,4 @@
-# OOP
+# OOP PROJECT GROUP: PANZERFAUST LECTURER: MADAM NURUL NADHRAH BINTI KAMARUZAMAN
 
 ## Run this project
 before opening powershell in address bar open this folder first
