@@ -49,7 +49,7 @@ public class User extends Account {
         return taskList;
     }
 
-    //used when FileHandler load task from tasks.txt
+    //used when FileHandler load task from tasks.txt for a specific user.
     public void setTaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
