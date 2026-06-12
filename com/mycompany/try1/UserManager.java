@@ -119,7 +119,6 @@ public class UserManager {
         userList = fileHandler.loadUsers();
 
         //for loop gets every member when i + 1
-        // 
         for (int i = 0; i < userList.size(); i++) {
             User user = userList.get(i);
 
