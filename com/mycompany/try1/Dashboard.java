@@ -22,9 +22,7 @@ public class Dashboard {
     public double getCompletionPercentage() {
         int total = getTotalTasks();
 
-        if (total == 0) {
-            return 0;
-        }
+        if (total == 0) {return 0;}
 
         return (getCompletedTasks() * 100.0) / total;
     }
