@@ -17,10 +17,10 @@ public class TaskManager {
     // runs when user clicks on add task then activates
     // handleAddTask() in TaskController.
     // handleAddTask() invokes addTask();
-    public void addTask(String activityName, LocalDate deadline, String priority) {
+    public void addTask(String activityName, LocalDate deadLine, String taskPriority) {
         // Assigns task values to task variables.
         // initially status set to false.
-        Task newTask = new Task(activityName, deadline, priority, false);
+        Task newTask = new Task(activityName, deadLine, taskPriority, false);
         // add new task into tasklist
         currentUser.getTaskList().add(newTask);
         // save to file immediately
@@ -29,11 +29,11 @@ public class TaskManager {
     // runs when user clicks on edit task then activates
     // handleEditTask() in TaskController
     // handleEditTask() calls editTask();
-    public void editTask(Task selectedTask, String newName, LocalDate newDeadline, String newPriority) {
+    public void editTask(Task selectedTask, String newTaskName, LocalDate newDeadLine, String newTaskPriority) {
         if (selectedTask != null) {
-            selectedTask.setActivityName(newName);
-            selectedTask.setDeadline(newDeadline);
-            selectedTask.setPriority(newPriority);
+            selectedTask.setActivityName(newTaskName);
+            selectedTask.setDeadline(newDeadLine);
+            selectedTask.setPriority(newTaskPriority);
             fileHandler.saveTasks(currentUser);
         }
     }
@@ -66,45 +66,46 @@ public class TaskManager {
     // value is returned to to the Dashboard
     // used by Dashboard and DashboardController classes.
     public int countCompletedTasks() {
-        int count = 0;
+        int counter = 0;
 
-        for (int i = 0; i < currentUser.getTaskList().size(); i++) {
-            Task task = currentUser.getTaskList().get(i);
+        for (int t = 0; t < currentUser.getTaskList().size(); t++) {
+            Task task = currentUser.getTaskList().get(t);
 
             if (task.isCompleted()) {
-                count++;
+                counter++;
             }
         }
 
-        return count;
+        return counter;
     }
 
     // used in the calculation on how many uncompleted task a user has. 
     public int countPendingTasks() {
-        int count = 0;
+        int counter = 0;
 
         for (int i = 0; i < currentUser.getTaskList().size(); i++) {
             Task task = currentUser.getTaskList().get(i);
 
             if (!task.isCompleted()) {
-                count++;
+                counter++;
             }
         }
 
-        return count;
+        return counter;
     }
 
+    // counts how many tasks in the list match a specific priority level for a particular user
     public int countPriority(String priority) {
-        int count = 0;
+        int counter = 0;
 
         for (int i = 0; i < currentUser.getTaskList().size(); i++) {
             Task task = currentUser.getTaskList().get(i);
 
             if (task.getPriority().equalsIgnoreCase(priority)) {
-                count++;
+                counter++;
             }
         }
 
-        return count;
+        return counter;
     }
 }
