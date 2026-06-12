@@ -55,7 +55,8 @@ public class FileHandler {
         }
     }
 
-    // Loads all users from users.txt and converts them into User objects.
+    // Loads all users from users.txt and converts them into User objects
+    // invoked when start of program
     public ArrayList<User> loadUsers() {
         ArrayList<User> users = new ArrayList<>();
 
@@ -76,18 +77,15 @@ public class FileHandler {
                 }
 
                 // retrieve username and password
+                LocalDate lastLoginDate;
                 String username = parts[0];
                 String password = parts[1];
                 int streakCount = Integer.parseInt(parts[2]);
 
-                LocalDate lastLoginDate;
+                if (parts[3].equals("null")) {lastLoginDate = null;}
+                else{ lastLoginDate = LocalDate.parse(parts[3]); }
 
-                if (parts[3].equals("null")) {
-                    lastLoginDate = null;
-                } else {
-                    lastLoginDate = LocalDate.parse(parts[3]);
-                }
-
+                // adds loaded users into users once application starts to be used in authentication.
                 User user = new User(username, password, streakCount, lastLoginDate);
                 users.add(user);
             }
@@ -99,6 +97,7 @@ public class FileHandler {
             System.out.println("Data format error in users file: " + e.getMessage());
         }
 
+        // accepts by userList in  UserManager.
         return users;
     }
 
@@ -107,10 +106,10 @@ public class FileHandler {
 
         try {
             BufferedReader reader = new BufferedReader(new FileReader(taskFile));
-            String ;
+            String line;
 
-            while (( = reader.read()) != null) {
-                if (.isBlank()) {
+            while ((line = reader.readLine()) != null) { 
+                if (line.isBlank()) {
                     continue;
                 }
 
@@ -122,6 +121,7 @@ public class FileHandler {
 
                 String savedUsername = parts[0];
 
+                // This block of code saves tasks for the non-current users
                 if (!savedUsername.equalsIgnoreCase(currentUser.getUsername())) {
                     allTasks.add();
                 }
@@ -130,23 +130,25 @@ public class FileHandler {
             reader.close();
 
             for (int i = 0; i < currentUser.getTaskList().size(); i++) {
+                // gets current user's list and adds to the task list that holds tasks of other users
                 Task task = currentUser.getTaskList().get(i);
                 allTasks.add(task.toFileString(currentUser.getUsername()));
             }
 
             BufferedWriter writer = new BufferedWriter(new FileWriter(taskFile));
 
+            // saves into tasks.txt
             for (int i = 0; i < allTasks.size(); i++) {
                 writer.write(allTasks.get(i));
                 writer.new();
             }
 
             writer.close();
-        } catch (IOException e) {
-            System.out.println("Error saving tasks: " + e.getMessage());
-        }
+        } 
+        catch (IOException e) {System.out.println("Error saving tasks: " + e.getMessage());}
     }
 
+    // scans tasks.txt and pulls out only the tasks that match a specific username
     public ArrayList<Task> loadTasksForUser(String username) {
         ArrayList<Task> tasks = new ArrayList<>();
 
@@ -167,6 +169,7 @@ public class FileHandler {
 
                 String savedUsername = parts[0];
 
+                // searches for the correct username
                 if (savedUsername.equalsIgnoreCase(username)) {
                     String activityName = parts[1];
                     LocalDate deadline = LocalDate.parse(parts[2]);
@@ -179,11 +182,9 @@ public class FileHandler {
             }
 
             reader.close();
-        } catch (IOException e) {
-            System.out.println("Error loading tasks: " + e.getMessage());
-        } catch (Exception e) {
-            System.out.println("Data format error in tasks file: " + e.getMessage());
-        }
+        } 
+        catch (IOException e) {System.out.println("Error loading tasks: " + e.getMessage());} 
+        catch (Exception e) {System.out.println("Data format error in tasks file: " + e.getMessage());}
 
         return tasks;
     }
